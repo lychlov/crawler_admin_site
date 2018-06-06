@@ -1,0 +1,21 @@
+TARGET_MP:
+    - "泰国星暹日报"
+    - "泰国世界日报"
+    - "泰国华人论坛"
+    - "泰平盛世"
+    - "泰国网"
+    - "Lychlov"
+
+
+
+IMG_STORE: "D:/IMG_STORE"
+#IMG_STORE: "/home/docker/work_space/IMG_STORE"
+#IMG_STORE: "/Users/zhikuncheng/devspace/IMG_STORE"
+
+MYSQL_CONNECT: ''
+
+MONGO_URI: 'mongodb://127.0.0.1/test'
+
+TRUE_VIDEO_API_URL: 'http://v.ranks.xin/video-parse.php?url='
+
+ARTICLE_INFO_API_URL: 'http://wxapi.51tools.info/wx/api.ashx?key=ps_499658904&ver=1'

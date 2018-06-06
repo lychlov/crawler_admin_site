@@ -1,0 +1,7 @@
+django
+lxml
+PyYAML
+requests
+wxpy
+pymongo
+pymysql
