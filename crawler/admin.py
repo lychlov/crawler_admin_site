@@ -6,7 +6,8 @@ from .models import TargetMP, WechatArticle
 class WechatArticleAdmin(admin.ModelAdmin):
     list_display = ('tittle', 'account', 'summary', 'recieve_time')
     list_filter = ['recieve_time', 'account']
-    search_fields = ['content', 'tittle']
+    search_fields = ['content']
+
 
 
 admin.site.register(TargetMP)

@@ -83,18 +83,18 @@ def download_pictures(dict_info, file_path='', picture_urls=[]):
 
 
 def localize_html(html_text):
-    html_text.replace('data-src="https://mmbiz.qpic.cn/mmbiz_gif/', 'src="')
-    html_text.replace('/640?wx_fmt=gif"', '.gif"')
-    html_text.replace('data-src="https://mmbiz.qpic.cn/mmbiz_jpg/', 'src="')
-    html_text.replace('/640?wx_fmt=jpeg"', '.jpeg"')
-    html_text.replace('data-src="https://mmbiz.qpic.cn/mmbiz_png/', 'src="')
-    html_text.replace('/640?wx_fmt=png"', '.png"')
+    html_text = html_text.replace('data-src="https://mmbiz.qpic.cn/mmbiz_gif/', 'src="')
+    html_text = html_text.replace('/640?wx_fmt=gif"', '.gif"')
+    html_text = html_text.replace('data-src="https://mmbiz.qpic.cn/mmbiz_jpg/', 'src="')
+    html_text = html_text.replace('/640?wx_fmt=jpeg"', '.jpeg"')
+    html_text = html_text.replace('data-src="https://mmbiz.qpic.cn/mmbiz_png/', 'src="')
+    html_text = html_text.replace('/640?wx_fmt=png"', '.png"')
     return html_text
 
 
 def save_article_html(dict_info, html_text):
     file_dir = check_file_path(dict_info, "")
-    # html_text = localize_html(html_text)
+    html_text = localize_html(html_text)
     try:
         html_file = open(file_dir + "/index.html", 'w', encoding='utf-8')
         html_file.write(html_text)
