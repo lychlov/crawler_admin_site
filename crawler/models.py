@@ -16,17 +16,17 @@ from django.db import models
 # |__biz|varchat|||公众号唯一参数 可关联公众号表|
 
 class WechatArticle(models.Model):
-    tittle = models.CharField(max_length=100)
-    author = models.CharField(max_length=20)
-    summary = models.CharField(max_length=300)
-    cover = models.CharField(max_length=300)
-    content = models.TextField()
-    like_num = models.IntegerField(default=0)
-    read_num = models.IntegerField(default=0)
-    comment = models.TextField()
-    url = models.URLField()
-    recieve_time = models.DateTimeField()
-    account = models.CharField(max_length=20)
+    tittle = models.CharField('标题', max_length=100)
+    author = models.CharField('作者', max_length=20)
+    summary = models.CharField('摘要', max_length=300)
+    cover = models.CharField('封面图链接', max_length=300)
+    content = models.TextField('文章内容')
+    like_num = models.IntegerField('点赞', default=0)
+    read_num = models.IntegerField('阅读', default=0)
+    comment = models.TextField('评论')
+    url = models.URLField('文章链接')
+    recieve_time = models.DateTimeField('发布时间')
+    account = models.CharField('公众号', max_length=20)
     biz = models.CharField(max_length=50)
 
     def __str__(self):

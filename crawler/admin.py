@@ -4,7 +4,7 @@ from .models import TargetMP, WechatArticle
 
 # Register your models here.
 class WechatArticleAdmin(admin.ModelAdmin):
-    list_display = ('account', 'tittle', 'summary', 'url', 'recieve_time')
+    list_display = ('account', 'tittle', 'summary',  'recieve_time')
     list_filter = ['recieve_time', 'account']
 
 

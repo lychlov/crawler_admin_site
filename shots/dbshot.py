@@ -8,7 +8,8 @@ sys.path.insert(0,'/Users/zhikuncheng/PycharmProjects/crawler_admin_site')
 os.environ["DJANGO_SETTINGS_MODULE"]= "crawler_admin_site.settings"
 django.setup()
 from crawler import models
-
+info = models.TargetMP(name='Lychlov')
+info.save()
 set_inf=models.TargetMP.objects.all()
 for info in set_inf:
     print(info.__str__())

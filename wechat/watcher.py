@@ -11,12 +11,12 @@
 -------------------------------------------------
 """
 from wxpy import *
-from time import sleep
-# from crawler.article_tasks import crawl_article
 import re
-
+import sys
+sys.path.append("D:/PycharmProjects/crawler_admin_site")
 from utils import MP_ACCOUNT
 from wechat_crawler import crawl_article
+
 
 logger = logging.getLogger(__name__)
 

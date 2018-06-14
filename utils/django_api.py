@@ -15,7 +15,7 @@ import sys
 
 import os
 
-sys.path.insert(0, '/Users/zhikuncheng/PycharmProjects/crawler_admin_site')
+sys.path.insert(0, 'D:/PycharmProjects/crawler_admin_site/')
 os.environ["DJANGO_SETTINGS_MODULE"] = "crawler_admin_site.settings"
 django.setup()
 
