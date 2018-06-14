@@ -82,10 +82,19 @@ def download_pictures(dict_info, file_path='', picture_urls=[]):
     pass
 
 
+def localize_html(html_text):
+    html_text.replace('data-src="https://mmbiz.qpic.cn/mmbiz_gif/','')
+    html_text.replace('','')
+    html_text.replace('','')
+    html_text.replace('','')
+    return  html_text
+
+
 def save_article_html(dict_info, html_text):
     file_dir = check_file_path(dict_info, "")
+    #html_text = localize_html(html_text)
     try:
-        html_file = open(file_dir + "/index.html", 'w')
+        html_file = open(file_dir + "/index.html", 'w',encoding='utf-8')
         html_file.write(html_text)
         html_file.close()
     except IOError as e:
