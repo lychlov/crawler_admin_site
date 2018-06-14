@@ -22,7 +22,7 @@ import requests
 from lxml import etree
 
 from apis.use_api import get_true_video_url, get_article_info
-from utils import get_header, get_img_store,save_wechat_article
+from utils import get_header, get_img_store, save_wechat_article
 
 
 def url2dict(url):
@@ -50,11 +50,11 @@ def check_file_path(dict_info, file_path='', ):
 def download_videos(dict_info, file_path='', video_urls=[]):
     file_dir = check_file_path(dict_info, file_path)
     for fake_url in video_urls:
-        headers=get_header()
+        headers = get_header()
         vid = url2dict(fake_url).get('vid', 'unknown')
         file_name = vid + ".mp4"
         true_url = get_true_video_url(fake_url)
-        video_file = requests.get(true_url, stream=True, timeout=10,headers=headers)
+        video_file = requests.get(true_url, stream=True, timeout=10, headers=headers)
         if video_file.status_code == 403:
             print("下载视频失败")
         with open(file_dir + "/" + file_name, 'wb') as fh:
@@ -80,6 +80,18 @@ def download_pictures(dict_info, file_path='', picture_urls=[]):
         except Exception as e:
             print('错误 ：', e)
     pass
+
+
+def save_article_html(dict_info, html_text):
+    file_dir = check_file_path(dict_info, "")
+    try:
+        html_file = open(file_dir + "/index.html", 'w')
+        html_file.write(html_text)
+        html_file.close()
+    except IOError as e:
+        print('文件操作失败', e)
+    except Exception as e:
+        print('错误 ：', e)
 
 
 def crawl_article(dicts):
@@ -125,8 +137,9 @@ def crawl_article(dicts):
         except Exception as e:
             print(e)
         try:
+            save_article_html(dict_info=article_item, html_text=res.text)
             download_pictures(dict_info=article_item, picture_urls=picture_urls)
-            _thread.start_new_thread(download_videos,(article_item, '', video_urls))
+            _thread.start_new_thread(download_videos, (article_item, '', video_urls))
         except:
             print("下载多媒体内容失败")
         sleep(60)

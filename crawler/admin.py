@@ -4,8 +4,9 @@ from .models import TargetMP, WechatArticle
 
 # Register your models here.
 class WechatArticleAdmin(admin.ModelAdmin):
-    list_display = ('account', 'tittle', 'summary',  'recieve_time')
+    list_display = ('tittle', 'account', 'summary', 'recieve_time')
     list_filter = ['recieve_time', 'account']
+    search_fields = ['content', 'tittle']
 
 
 admin.site.register(TargetMP)
