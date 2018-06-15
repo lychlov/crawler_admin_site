@@ -45,6 +45,7 @@ def save_wechat_article(item, comment_info_json):
         print(e)
         return
     wechat_article.save()
+    print("成功爬取文章：%" % wechat_article.tittle)
     logo_url_list = []
     if comment_info_json.get('count', 0) > 0:
         comment_data = comment_info_json.get('data', [])
@@ -55,5 +56,4 @@ def save_wechat_article(item, comment_info_json):
                                               create_time=comment.get('create_time', ''),
                                               like_num=comment.get('like_num', ''))
             logo_url_list.append(comment.get('logo_url', ''))
-    print("成功爬取文章：%" % wechat_article.tittle)
     return logo_url_list
