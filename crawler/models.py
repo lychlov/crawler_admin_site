@@ -23,7 +23,6 @@ class WechatArticle(models.Model):
     content = models.TextField('文章内容')
     like_num = models.IntegerField('点赞', default=0)
     read_num = models.IntegerField('阅读', default=0)
-    comment = models.TextField('评论')
     url = models.URLField('文章链接')
     recieve_time = models.DateTimeField('发布时间')
     account = models.CharField('公众号', max_length=20)
@@ -31,6 +30,15 @@ class WechatArticle(models.Model):
 
     def __str__(self):
         return self.tittle
+
+
+class Comment(models.Model):
+    nick_name = models.CharField('昵称', max_length=100)
+    logo_url = models.URLField('头像链接地址')
+    content = models.TextField('评论内容')
+    create_time = models.TimeField('评论时间')
+    like_num = models.IntegerField('点赞', default=0)
+    wechat_article = models.ForeignKey(WechatArticle, on_delete=models.CASCADE)
 
 
 class TargetMP(models.Model):

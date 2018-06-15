@@ -19,3 +19,5 @@ MONGO_URI: 'mongodb://127.0.0.1/test'
 TRUE_VIDEO_API_URL: 'http://v.ranks.xin/video-parse.php?url='
 
 ARTICLE_INFO_API_URL: 'http://wxapi.51tools.info/wx/api.ashx?key=ps_499658904&ver=1'
+
+ARTICLE_COMMENTS_API_URL: 'http://wxapi.51tools.info/wx/apicomments.ashx?key=ps_499658904'

@@ -21,7 +21,7 @@ import re
 import requests
 from lxml import etree
 
-from apis.use_api import get_true_video_url, get_article_info
+from apis.use_api import get_true_video_url, get_article_info, get_article_comments
 from utils import get_header, get_img_store, save_wechat_article
 
 
@@ -132,6 +132,7 @@ def crawl_article(dicts):
         # 视频集合
         video_urls = selector.xpath("//iframe[@class='video_iframe']/@data-src")
         json_info = get_article_info(url)
+        comments_info = get_article_comments(url)
         if json_info is not None:
             like_num = json_info.get('data', {}).get('zannums', 0)
             read_num = json_info.get('data', {}).get('readnums', 0)
@@ -143,7 +144,7 @@ def crawl_article(dicts):
                         'comment': "", 'url': url, 'receive_time': article_dict.get('receive_time', ""),
                         'account': article_dict.get('account', ""), 'biz': __biz}
         try:
-            save_wechat_article(article_item)
+            save_wechat_article(article_item, comments_info)
             print("文章存储完成")
         except Exception as e:
             print(e)

@@ -21,9 +21,12 @@ with open(config_path, encoding='utf-8') as f:
 
 cf = load(cont)
 
+def get_article_comments_api_url():
+    return cf.get('ARTICLE_COMMENTS_API_URL','')
 
 def get_MP_accounts():
-    return cf.get('TARGET_MP',[])
+    return cf.get('TARGET_MP', [])
+
 
 def get_article_info_api_url():
     return cf.get('ARTICLE_INFO_API_URL', '')
