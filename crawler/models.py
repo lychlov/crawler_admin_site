@@ -36,9 +36,15 @@ class Comment(models.Model):
     nick_name = models.CharField('昵称', max_length=100)
     logo_url = models.URLField('头像链接地址')
     content = models.TextField('评论内容')
-    create_time = models.TimeField('评论时间')
+    create_time = models.DateTimeField('评论时间')
     like_num = models.IntegerField('点赞', default=0)
     wechat_article = models.ForeignKey(WechatArticle, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return "%s ： %s \n点赞：%s" % (self.nick_name, self.content, self.like_num)
+
+    def detail(self):
+        return "%s ： %s \n点赞：%s" % (self.nick_name, self.content, self.like_num)
 
 
 class TargetMP(models.Model):
