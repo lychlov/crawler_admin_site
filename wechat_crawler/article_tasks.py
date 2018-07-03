@@ -22,7 +22,7 @@ import requests
 from lxml import etree
 
 from apis.use_api import get_true_video_url, get_article_info, get_article_comments
-from utils import get_header, get_img_store, save_wechat_article
+from utils import get_header, get_img_store,save_wechat_article
 
 
 def url2dict(url):
@@ -116,8 +116,8 @@ def crawl_article(dicts):
         print("开始爬取：%s" % url)
         res = sess.get(url, headers=headers)
         selector = etree.HTML(res.text)
-        rich_media = selector.xpath(
-            "//div[@class='rich_media_inner']/div[@id='page-content']/div[1]/div[2]")[0]
+        # rich_media = selector.xpath(
+            # "//div[@class='rich_media_inner']/div[@id='page-content']/div[1]/div[2]")[0]
         try:
             author = selector.xpath("//div[@id='meta_content']/span[@class='rich_media_meta rich_media_meta_text']")[
                 0].xpath(
@@ -126,7 +126,9 @@ def crawl_article(dicts):
             author = ''
         __biz = url2dict(url).get('__biz', '')
         # 正文文字
-        content = rich_media.xpath("string(.)")
+        # content = rich_media.xpath("string(.)")
+        content = selector.xpath("//div[@class='rich_media_content ']")[0].xpath("string(.)")
+
         # 图片集合
         picture_urls = selector.xpath("//img/@data-src")
         # 视频集合
