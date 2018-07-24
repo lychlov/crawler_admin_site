@@ -69,6 +69,11 @@ def download_pictures(dict_info, file_path='', picture_urls=[]):
     file_dir = check_file_path(dict_info, file_path)
     for picture_url in picture_urls:
         pic_type = picture_url.split('=')[-1]
+        if picture_url[-1]=='?':
+            try:
+                pic_type = re.findall(r'/\d*\.(.+?)\?',picture_url)[0]
+            except:
+                pass
         file_name = picture_url.split('/')[4] + "." + pic_type
         try:
             pic = requests.get(picture_url, timeout=5)
@@ -151,7 +156,7 @@ def crawl_article(dicts):
         except Exception as e:
             print(e)
         try:
-            save_article_html(dict_info=article_item, html_text=res.text)
+            # save_article_html(dict_info=article_item, html_text=res.text)
             download_pictures(dict_info=article_item, picture_urls=picture_urls)
             _thread.start_new_thread(download_videos, (article_item, '', video_urls))
         except:

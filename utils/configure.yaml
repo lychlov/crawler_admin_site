@@ -8,7 +8,7 @@ TARGET_MP:
 
 
 
-IMG_STORE: "D:/IMG_STORE"
+IMG_STORE: "/home/wechatArticleImg"
 #IMG_STORE: "/home/docker/work_space/IMG_STORE"
 #IMG_STORE: "/Users/zhikuncheng/devspace/IMG_STORE"
 

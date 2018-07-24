@@ -78,10 +78,10 @@ WSGI_APPLICATION = 'crawler_admin_site.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'crawler',
-        'USER': 'crawler',
-        'PASSWORD': 'shenhai123',
-        'HOST': '127.0.0.1',
+        'NAME': 'wxarticle',
+        'USER': 'dispatch',
+        'PASSWORD': 'KYb-ho5-mLs-eq8',
+        'HOST': '172.16.21.245',
         'PORT': '3306',
     }
 }

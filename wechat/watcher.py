@@ -13,16 +13,18 @@
 from wxpy import *
 import re
 import sys
-sys.path.append("D:/PycharmProjects/crawler_admin_site")
+
+sys.path.append("/home/pyProject")
 from utils import MP_ACCOUNT
 from wechat_crawler import crawl_article
-
 
 logger = logging.getLogger(__name__)
 
 # bot = Bot(, console_qr=1,qr_path='')
-bot = Bot(cache_path=True)
+bot = Bot(cache_path=True, console_qr=2, qr_path='')
 
+
+# bot = Bot(cache_path=True)
 
 
 # bot.self.send('能收到吗？')
