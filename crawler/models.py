@@ -13,7 +13,7 @@ class WechatArticle(models.Model):
     recieve_time = models.DateTimeField('发布时间')
     account = models.CharField('公众号', max_length=20)
     biz = models.CharField(max_length=50)
-    pictures = models.TextField('图片列表')
+    pictures = models.TextField('图片列表',)
 
     def __str__(self):
         return self.tittle

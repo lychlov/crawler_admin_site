@@ -10,6 +10,7 @@
                    2018/5/22:
 -------------------------------------------------
 """
+import datetime
 import os
 import urllib
 from urllib.parse import urlparse, parse_qs
@@ -22,7 +23,7 @@ import requests
 from lxml import etree
 
 from apis.use_api import get_true_video_url, get_article_info, get_article_comments
-from utils import get_header, get_img_store,save_wechat_article
+from utils import get_header, get_img_store, save_wechat_article
 
 
 def url2dict(url):
@@ -36,10 +37,10 @@ def set_file_title(title):
 
 
 def check_file_path(dict_info, file_path='', ):
-    account = set_file_title(dict_info.get('account', 'unkown'))
-    title = set_file_title(dict_info.get('title', 'unkown'))
+    account = set_file_title(dict_info.get('biz', 'unkown'))
+    date_stamp = datetime.datetime.now().strftime('%Y%m%d')
     file_path = get_img_store()
-    file_dir = os.path.join(file_path, account, title)
+    file_dir = os.path.join(file_path, account, date_stamp)
     if not os.path.exists(file_dir):
         # 如果不存在则创建目录
         #  创建目录操作函数
@@ -69,9 +70,9 @@ def download_pictures(dict_info, file_path='', picture_urls=[]):
     file_dir = check_file_path(dict_info, file_path)
     for picture_url in picture_urls:
         pic_type = picture_url.split('=')[-1]
-        if picture_url[-1]=='?':
+        if picture_url[-1] == '?':
             try:
-                pic_type = re.findall(r'/\d*\.(.+?)\?',picture_url)[0]
+                pic_type = re.findall(r'/\d*\.(.+?)\?', picture_url)[0]
             except:
                 pass
         file_name = picture_url.split('/')[4] + "." + pic_type
@@ -122,7 +123,7 @@ def crawl_article(dicts):
         res = sess.get(url, headers=headers)
         selector = etree.HTML(res.text)
         # rich_media = selector.xpath(
-            # "//div[@class='rich_media_inner']/div[@id='page-content']/div[1]/div[2]")[0]
+        # "//div[@class='rich_media_inner']/div[@id='page-content']/div[1]/div[2]")[0]
         try:
             author = selector.xpath("//div[@id='meta_content']/span[@class='rich_media_meta rich_media_meta_text']")[
                 0].xpath(
@@ -136,6 +137,7 @@ def crawl_article(dicts):
 
         # 图片集合
         picture_urls = selector.xpath("//img/@data-src")
+        pictures = [picture_url.split('/')[4] + "." + picture_url.split('=')[-1] for picture_url in picture_urls]
         # 视频集合
         video_urls = selector.xpath("//iframe[@class='video_iframe']/@data-src")
         json_info = get_article_info(url)
@@ -149,7 +151,7 @@ def crawl_article(dicts):
                         'cover': article_dict.get('cover', ""), 'content': content, 'like_num': like_num,
                         'read_num': read_num,
                         'comment': "", 'url': url, 'receive_time': article_dict.get('receive_time', ""),
-                        'account': article_dict.get('account', ""), 'biz': __biz}
+                        'account': article_dict.get('account', ""), 'biz': __biz, 'pictures': pictures}
         try:
             save_wechat_article(article_item, comments_info)
             print("文章存储完成")

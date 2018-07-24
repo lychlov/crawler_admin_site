@@ -41,7 +41,9 @@ def save_wechat_article(item, comment_info_json):
                                               url=item['url'],
                                               recieve_time=item['receive_time'],
                                               account=item['account'],
-                                              biz=item['biz'])
+                                              biz=item['biz'],
+                                              pictures=str(item['pictures']),
+                                              )
         wechat_article.save()
         logo_url_list = []
         if comment_info_json.get('count', 0) > 0:
