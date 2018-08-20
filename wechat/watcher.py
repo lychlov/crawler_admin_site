@@ -21,7 +21,7 @@ from wechat_crawler import crawl_article
 logger = logging.getLogger(__name__)
 
 # bot = Bot(, console_qr=1,qr_path='')
-bot = Bot(cache_path=True, console_qr=2, qr_path='')
+bot = Bot(cache_path=True, console_qr=1, qr_path='')
 
 
 # bot = Bot(cache_path=True)
@@ -41,7 +41,7 @@ def auto_add_mps(msg):
     if msg.sender.name in MP_ACCOUNT or msg.sender.name is bot.self.name:
         print("hit %s" % msg.sender.name)
     else:
-        print("miss %s" % msg.sender.name)
+        print("miss   %s" % msg.sender.name)
         return
     article_dicts = []
     if msg.articles is None:

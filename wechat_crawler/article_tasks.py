@@ -70,11 +70,10 @@ def download_pictures(dict_info, file_path='', picture_urls=[]):
     file_dir = check_file_path(dict_info, file_path)
     for picture_url in picture_urls:
         pic_type = picture_url.split('=')[-1]
-        if picture_url[-1] == '?':
-            try:
-                pic_type = re.findall(r'/\d*\.(.+?)\?', picture_url)[0]
-            except:
-                pass
+        try:
+            pic_type = re.findall(r'/mmbiz_(.+?)/', picture_url)[0]
+        except:
+            pass
         file_name = picture_url.split('/')[4] + "." + pic_type
         try:
             pic = requests.get(picture_url, timeout=5)
@@ -140,11 +139,18 @@ def crawl_article(dicts):
         pictures = [picture_url.split('/')[4] + "." + picture_url.split('=')[-1] for picture_url in picture_urls]
         # 视频集合
         video_urls = selector.xpath("//iframe[@class='video_iframe']/@data-src")
-        json_info = get_article_info(url)
-        comments_info = get_article_comments(url)
-        if json_info is not None:
-            like_num = json_info.get('data', {}).get('zannums', 0)
-            read_num = json_info.get('data', {}).get('readnums', 0)
+
+        like_num = 0
+        read_num = 0
+        comments_info = {}
+        try:
+            json_info = get_article_info(url)
+            comments_info = get_article_comments(url)
+            if json_info is not None:
+                like_num = json_info.get('data', {}).get('zannums', 0)
+                read_num = json_info.get('data', {}).get('readnums', 0)
+        except Exception as e:
+            print(e)
 
         article_item = {'title': article_dict.get('title', ""), 'author': author,
                         'summary': article_dict.get('summary', ""),
